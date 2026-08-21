@@ -9,16 +9,20 @@
 - [x] Policy Studio with explicit deterministic fallback
 - [x] English README, MIT license, architecture, API, security, data model, tests, and Xano build story
 - [x] Reproducible three-scenario dataset and commands
+- [x] Versioned XanoScript backend and browser adapter
+- [x] Official XanoScript validation for all 15 constructs
+- [x] Devpost project-page draft and three-minute demo script
+- [x] Public Netlify deployment and desktop browser smoke test
 
 ## Must be completed before final submission
 
 - [ ] Create/push the public `Jhony071191/actionguard-ai` GitHub repository
 - [ ] Connect and verify the existing Xano instance as the central backend
 - [ ] Re-run the contract and scenario suite against deployed Xano
-- [ ] Deploy the web app and test the public URL
+- [x] Deploy the web app and test the public URL
 - [ ] Record a concise demo video showing all three decisions and approval execution
 - [ ] Add final screenshots, project story, technology list, and repository/demo links to Devpost
-- [ ] Select only sponsor categories whose requirements are actually met
+- [ ] Select Overall and Xano only after live Xano evidence exists
 - [ ] Confirm the final rules and submit before the official deadline
 
-Do not submit yet: the Xano connection and public deployment are deliberately unclaimed.
+Do not submit yet: the Xano connection, public repository, and video are deliberately unclaimed.

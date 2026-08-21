@@ -1,4 +1,4 @@
-# Project status — 17 August 2026
+# Project status — 21 August 2026
 
 ## Completed
 
@@ -8,13 +8,19 @@
 - Policy Studio with an honest deterministic fallback when no AI provider is configured.
 - Three required synthetic scenarios and full documentation set.
 - Strict type check, automated unit/contract/integration suite, production build, API smoke test, dependency audit, and secret-pattern review.
+- Official Xano Developer MCP validator versioned in the project; Xano CLI 1.2.0 verified as an on-demand deployment tool.
+- Complete XanoScript backend: six tables, two functions, one API group, and five authenticated endpoints.
+- React/Xano runtime adapter with fail-closed HTTP handling.
+- XanoScript validation, submission copy, Xano build story, and three-minute demo script.
+- Public Netlify deployment at `https://actionguard-ai.netlify.app/`.
+- Desktop browser verification of all three outcomes, approval-before-execution, hash evidence, masked banking data, and deterministic Policy Studio fallback.
 
 ## Externally blocked
 
 - GitHub identity `Jhony071191` is connected, but the available connector cannot create a new repository and `actionguard-ai` did not exist at verification time. The complete local Git history is ready to push.
-- The supplied Xano instance was not available through an authenticated execution session. No instance or endpoint was modified.
-- A browser launch was attempted for visual QA; the isolated browser cannot reach the local loopback address. Responsive layouts and states were reviewed statically, but no desktop/mobile browser test is claimed.
+- The supplied Xano instance was not available through an authenticated CLI profile. No instance or endpoint was modified; `xano profile list -d` returned no profiles.
+- The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
 
 ## Next indispensable action
 
-Create the public empty repository `Jhony071191/actionguard-ai`, then push this existing Git history. After that, implement the documented API group in the existing Xano `jhony` instance and run the same contract/scenario suite against it.
+Create the public empty repository `Jhony071191/actionguard-ai`, then push this existing Git history. Authenticate the Xano CLI to the existing `jhony` instance, inspect a dry-run of `xano/`, push the reviewed backend, and run the same contract/scenario suite against it.

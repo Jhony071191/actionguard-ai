@@ -1,31 +1,49 @@
 # Xano build story
 
-## Why Xano is central
+## What software did we replace?
 
-ActionGuard needs durable, tenant-scoped state and transactional workflows more than a thin proxy. Xano is designed to own the production data model, API endpoints, approval transactions, idempotency enforcement, and audit-chain persistence. The React client should consume Xano through one adapter.
+ActionGuard AI replaces slow procurement portals, approval-ticket queues, and spreadsheet controls that were built for humans manually submitting requests. Those tools become a dangerous bottleneck when AI agents can call purchasing, vendor, and customer-data APIs in seconds.
 
-## Confirmed and unconfirmed state
+## What is better now?
 
-The participant supplied evidence of an account and a single instance named `jhony` with host `xgrz-w2pq-acsr.n7e.xano.io`; the evidence showed it still provisioning. This execution had no authenticated Xano session and did not probe, modify, or claim that instance as live. No second instance was created.
+One pre-flight API call returns `ALLOW`, `REVIEW`, or `DENY`. Safe actions execute once, risky actions wait for a named human and reason, forbidden actions stop, and every transition becomes hash-linked evidence. The same layer works across procurement, finance, privacy, support, and operations.
 
-## Build recipe in the existing `jhony` instance
+## How Xano powers the product
 
-Create tables `organizations`, `actors`, `policies`, `actions`, `approvals`, `executions`, and `audit_events`. Every business table includes `organization_id`. Add unique indexes on `(organization_id, idempotency_key)` for actions and `(action_id)` for executions.
+Xano is not a decorative proxy. The versioned `xano/` source contains:
 
-Implement API group `/v1` matching the OpenAPI file. In `evaluate`:
+- six tenant-scoped tables: `organization`, `user`, `action`, `review`, `audit_event`, and `policy`;
+- unique organization + idempotency-key and action + sequence constraints;
+- an authenticated API group with evaluate, list, approve, reject, and evidence endpoints;
+- deterministic policy logic with three inline Xano unit tests;
+- transaction-bound approval and execution workflows;
+- bank-field masking before persistence;
+- SHA-256 audit-event chaining;
+- official CLI/developer-MCP validation;
+- a React adapter that activates Xano from runtime environment variables.
 
-1. Resolve organization and actor from authentication, never from an untrusted body alone.
-2. Start a transaction and return an existing action on idempotency conflict.
-3. Evaluate DENY rules first, REVIEW second, explicit ALLOW last, defaulting to DENY.
-4. Persist a masked decision and append its canonical SHA-256 audit event.
-5. Execute an ALLOW effect once; REVIEW creates no effect.
+## Where AI helps—and where it cannot
 
-The approval endpoint locks the action row, confirms `PENDING_REVIEW`, records reviewer and reason, creates exactly one execution, and appends approval and execution events. Add tenant filters to every query and test them with two organizations.
+AI converts plain-language governance into an editable policy draft and improves explanations. A deterministic fallback keeps Policy Studio functional when an AI provider fails. AI cannot publish a policy, approve a request, override `DENY`, or execute an effect.
 
-## Connection checklist
+## Build acceleration
 
-- Wait until the existing instance reports active.
-- Create the schema and functions above without entering payment details or accepting new legal terms.
-- Store the API base URL in `VITE_ACTIONGUARD_API_URL`; keep tokens server-side.
-- Run the contract suite and the three demo scenarios against Xano.
-- Record endpoint evidence and only then change the README status from local adapter to connected.
+Codex helped translate the security model into TypeScript, tests, XanoScript, API contracts, and documentation. Without AI plus Xano, building a tenant-safe schema, authenticated APIs, workflow transactions, local adapters, and a polished React console would have taken substantially longer and required separate backend infrastructure.
+
+## Verified local status
+
+All 15 XanoScript constructs validate with the official `@xano/developer-mcp` package. The installed Xano CLI is version 1.2.0. No Xano CLI profile exists in this execution environment, so no remote workspace change or deployment is claimed.
+
+The participant previously supplied evidence of one instance named `jhony` with host `xgrz-w2pq-acsr.n7e.xano.io`. No second instance was created.
+
+## Safe deployment sequence
+
+1. Run `npx @xano/cli auth` and select the existing `jhony` instance and intended workspace.
+2. Verify with `npm run xano:profile`; never paste the token into source or chat.
+3. Run `npm run verify` and commit the known-good snapshot.
+4. Run `npx @xano/cli workspace push -d ./xano --dry-run` and inspect every create/update/delete.
+5. Apply the push only after reviewing that preview.
+6. Create one synthetic organization plus demo users; never load personal or financial data.
+7. Configure the browser with the live canonical URL and a demo-only token.
+8. Repeat all three scenarios, approval, isolation, idempotency, and hash verification against Xano.
+9. Deploy `dist/` using Xano static hosting and record the verified production URL.

@@ -4,9 +4,11 @@
 
 ActionGuard AI evaluates an agent's intended business action before execution. A deterministic policy engine returns **ALLOW**, **REVIEW**, or **DENY**, while a human approval flow and a SHA-256 audit chain preserve accountability. AI can draft policy rules and explain outcomes, but it cannot bypass published controls.
 
+**Live demo:** [actionguard-ai.netlify.app](https://actionguard-ai.netlify.app/)
+
 ## Why it matters
 
-Businesses are giving agents access to procurement, customer data, support tooling, and operational APIs. Existing controls are fragmented across gateways, tickets, and spreadsheets. ActionGuard AI combines authorization, risk checks, human review, idempotent execution, and evidence in one reusable layer.
+Businesses are giving agents access to procurement, customer data, support tooling, and operational APIs. Existing approval portals are slow, fragmented across tickets and spreadsheets, and were designed for people clicking forms—not autonomous agents. ActionGuard AI rebuilds that business software as a real-time control plane combining authorization, risk checks, human review, idempotent execution, and evidence.
 
 ## Demo scenarios
 
@@ -21,7 +23,8 @@ Businesses are giving agents access to procurement, customer data, support tooli
 - **Web:** React + TypeScript + Vite, responsive and keyboard accessible.
 - **Core:** deterministic, framework-independent TypeScript policy engine.
 - **API:** dependency-light Node HTTP reference server with organization scoping and rate limiting.
-- **Persistence target:** Xano for authentication, data model, workflows, and API hosting. A local adapter keeps the demo usable until authenticated Xano access is available.
+- **Backend:** validated XanoScript for authentication, six tenant-scoped tables, policy evaluation, transactional approvals, idempotency, APIs, and audit persistence. A local adapter keeps the demo reproducible before authenticated deployment.
+- **Adapter:** the browser switches to Xano when `VITE_ACTIONGUARD_API_URL` is configured and a short-lived token exists in session storage; tokens are never compiled into the frontend. Otherwise it uses the local deterministic demo.
 - **AI:** optional policy-drafting adapter with a deterministic fallback.
 
 See [Architecture](docs/ARCHITECTURE.md), [API specification](docs/API.md), [Security](docs/SECURITY.md), and [Xano build story](docs/XANO_BUILD_STORY.md).
@@ -51,7 +54,20 @@ The API listens on `http://localhost:8787`. Send `x-organization-id: org-demo` o
 npm run verify
 ```
 
-This runs strict TypeScript checks, the automated suite, and a production build. Exact results from the verified build are recorded in [TEST_REPORT.md](docs/TEST_REPORT.md).
+This runs strict TypeScript checks, the automated suite, official XanoScript validation, and a production build. Exact results are recorded in [TEST_REPORT.md](docs/TEST_REPORT.md).
+
+## Deploy to the existing Xano workspace
+
+The official Developer MCP validator is a development dependency. Run the official Xano CLI on demand so its deployment-only dependency tree is not shipped with or locked into the product. Authenticate locally, select the existing workspace, preview the change, and only then push:
+
+```bash
+npx @xano/cli auth
+npm run xano:profile
+npm run xano:validate
+npx @xano/cli workspace push -d ./xano --dry-run
+```
+
+The final non-dry-run push is intentionally not scripted because it changes a remote workspace and must be reviewed. See the [Xano build story](docs/XANO_BUILD_STORY.md).
 
 ## API surface
 
@@ -77,9 +93,8 @@ This runs strict TypeScript checks, the automated suite, and a production build.
 
 ## Hackathon status
 
-Built from scratch for the DevNetwork [API + Cloud + AI] Hackathon 2026. The local MVP is independently runnable. Xano is the intended central backend, but a live Xano integration is only claimed after authenticated deployment and endpoint verification.
+Built from scratch for the DevNetwork [API + Cloud + AI] Hackathon 2026 and aligned to **Xano: Rebuild a SaaS Tool You Hate**. It replaces rigid procurement and approval portals with an AI-era action control plane. The web demo is publicly deployed and browser-tested. The complete Xano backend is versioned and validated; a live Xano integration is only claimed after authenticated deployment and endpoint verification.
 
 ## License
 
 MIT © 2026 Jhony Alexander Mosquera Zapata
-
