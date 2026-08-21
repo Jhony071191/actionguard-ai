@@ -152,20 +152,24 @@ export class ActionGuardService {
   async draftPolicy(sourceText: string, aiAvailable = false): Promise<PolicyDraft> {
     if (sourceText.trim().length < 12) throw new ValidationError('Policy text must be at least 12 characters');
     const rules: PolicyRule[] = [];
-    const amountMatch = sourceText.match(/(?:over|above|more than|greater than)\s*\$?([\d,]+)/i);
+    const clauses = sourceText.split(/\b(?:and|then)\b|[.;]/i).map((clause) => clause.trim()).filter(Boolean);
+    const effectFor = (clause: string): PolicyRule['effect'] => /\b(?:deny|block)\b/i.test(clause) ? 'DENY' : 'REVIEW';
+    const amountClause = clauses.find((clause) => /(?:over|above|more than|greater than)\s*\$?[\d,]+/i.test(clause)) ?? sourceText;
+    const amountMatch = amountClause.match(/(?:over|above|more than|greater than)\s*\$?([\d,]+)/i);
     if (amountMatch) {
       rules.push({
         id: globalThis.crypto.randomUUID(),
-        effect: /deny|block/i.test(sourceText) ? 'DENY' : 'REVIEW',
+        effect: effectFor(amountClause),
         field: 'amount',
         operator: 'gt',
         value: Number(amountMatch[1].replaceAll(',', '')),
       });
     }
-    if (/export/i.test(sourceText)) {
+    const exportClause = clauses.find((clause) => /\bexport/i.test(clause));
+    if (exportClause) {
       rules.push({
         id: globalThis.crypto.randomUUID(),
-        effect: /deny|block/i.test(sourceText) ? 'DENY' : 'REVIEW',
+        effect: effectFor(exportClause),
         field: 'action',
         operator: 'contains',
         value: 'export',
@@ -219,4 +223,3 @@ export class ActionGuardService {
     };
   }
 }
-

@@ -10,18 +10,21 @@
     "lint": "tsc -b --pretty false",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "verify": "npm run lint && npm run test && npm run build"
+    "xano:validate": "node scripts/validate-xano.mjs",
+    "xano:profile": "npx --yes @xano/cli profile list -d",
+    "verify": "npm run lint && npm run test && npm run xano:validate && npm run build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "vite": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@xano/developer-mcp": "^2.2.5",
     "tsx": "latest",
     "typescript": "latest",
     "vitest": "latest"
