@@ -24,6 +24,7 @@
 - Secure browser login and session-only Xano token handling implemented, covered by regression tests, and merged to GitHub `main` through PR #1.
 - Canonical `ActionGuard` API base URL configured in the existing Netlify project's build environment without exposing credentials.
 - Synthetic demo password manually rotated in Xano and retained outside the repository.
+- Devpost draft created as `ActionGuard AI`; the project name, elevator pitch, full story, verified repository/demo links, and technology tags are saved and previewed without duplicate placeholder headings.
 
 ## Remaining release work
 
@@ -31,6 +32,7 @@
 - Repeat the full public browser journey after that upload, using the privately retained synthetic password and without embedding any credential or bearer token.
 - The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
 - Prepare the final video and Devpost submission only after the public Xano-backed journey passes.
+- Complete Devpost Additional Info with the Xano sponsor selection and downloadable video backup only after the real MP4 exists; the final submission remains untouched.
 
 ## Next indispensable action
 
