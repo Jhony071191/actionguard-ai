@@ -56,18 +56,17 @@ npm run verify
 
 This runs strict TypeScript checks, the automated suite, official XanoScript validation, and a production build. Exact results are recorded in [TEST_REPORT.md](docs/TEST_REPORT.md).
 
-## Deploy to the existing Xano workspace
+## Existing Xano deployment
 
-The official Developer MCP validator is a development dependency. Run the official Xano CLI on demand so its deployment-only dependency tree is not shipped with or locked into the product. Authenticate locally, select the existing workspace, preview the change, and only then push:
+The backend is published in the existing `jhony` Xano instance under the `ActionGuard` API group. The canonical public base URL is configured at build time with `VITE_ACTIONGUARD_API_URL`; it is not a secret. Browser credentials and bearer tokens are never committed and live only in session storage.
+
+The official Developer MCP validator remains a development dependency. For a reproducible review of the versioned XanoScript:
 
 ```bash
-npx @xano/cli auth
-npm run xano:profile
 npm run xano:validate
-npx @xano/cli workspace push -d ./xano --dry-run
 ```
 
-The final non-dry-run push is intentionally not scripted because it changes a remote workspace and must be reviewed. See the [Xano build story](docs/XANO_BUILD_STORY.md).
+See the [Xano build story](docs/XANO_BUILD_STORY.md) for the verified remote architecture and test evidence.
 
 ## API surface
 
@@ -93,7 +92,7 @@ The final non-dry-run push is intentionally not scripted because it changes a re
 
 ## Hackathon status
 
-Built from scratch for the DevNetwork [API + Cloud + AI] Hackathon 2026 and aligned to **Xano: Rebuild a SaaS Tool You Hate**. It replaces rigid procurement and approval portals with an AI-era action control plane. The web demo is publicly deployed and browser-tested. The complete Xano backend is versioned and validated; a live Xano integration is only claimed after authenticated deployment and endpoint verification.
+Built from scratch for the DevNetwork [API + Cloud + AI] Hackathon 2026 and aligned to **Xano: Rebuild a SaaS Tool You Hate**. It replaces rigid procurement and approval portals with an AI-era action control plane. The Xano backend is live, versioned, validated, and independently exercised against all three scenarios. The production frontend currently remains on its verified local-fallback build until the already-configured Xano-enabled build is uploaded to Netlify.
 
 ## License
 
