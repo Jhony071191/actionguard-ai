@@ -14,13 +14,13 @@
 - XanoScript validation, submission copy, Xano build story, and three-minute demo script.
 - Public Netlify deployment at `https://actionguard-ai.netlify.app/`.
 - Desktop browser verification of all three outcomes, approval-before-execution, hash evidence, masked banking data, and deterministic Policy Studio fallback.
+- Public GitHub repository at `https://github.com/Jhony071191/actionguard-ai`, with all 57 tracked files verified against the local Git object hashes.
 
 ## Externally blocked
 
-- GitHub identity `Jhony071191` is connected, but the available connector cannot create a new repository and `actionguard-ai` did not exist at verification time. The complete local Git history is ready to push.
 - The supplied Xano instance was not available through an authenticated CLI profile. No instance or endpoint was modified; `xano profile list -d` returned no profiles.
 - The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
 
 ## Next indispensable action
 
-Create the public empty repository `Jhony071191/actionguard-ai`, then push this existing Git history. Authenticate the Xano CLI to the existing `jhony` instance, inspect a dry-run of `xano/`, push the reviewed backend, and run the same contract/scenario suite against it.
+Authenticate the Xano CLI to the existing `jhony` instance, inspect a dry-run of `xano/`, push the reviewed backend, and run the same contract/scenario suite against it.

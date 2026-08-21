@@ -13,10 +13,11 @@
 - [x] Official XanoScript validation for all 15 constructs
 - [x] Devpost project-page draft and three-minute demo script
 - [x] Public Netlify deployment and desktop browser smoke test
+- [x] Public GitHub repository with verified project history
 
 ## Must be completed before final submission
 
-- [ ] Create/push the public `Jhony071191/actionguard-ai` GitHub repository
+- [x] Create/push the public `Jhony071191/actionguard-ai` GitHub repository
 - [ ] Connect and verify the existing Xano instance as the central backend
 - [ ] Re-run the contract and scenario suite against deployed Xano
 - [x] Deploy the web app and test the public URL
@@ -25,4 +26,4 @@
 - [ ] Select Overall and Xano only after live Xano evidence exists
 - [ ] Confirm the final rules and submit before the official deadline
 
-Do not submit yet: the Xano connection, public repository, and video are deliberately unclaimed.
+Do not submit yet: the Xano connection and video are deliberately unclaimed.

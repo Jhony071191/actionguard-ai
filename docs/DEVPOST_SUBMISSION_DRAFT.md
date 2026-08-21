@@ -8,6 +8,11 @@ ActionGuard AI
 
 The pre-flight control plane that lets AI agents move fast without turning API access into uncontrolled business consequences.
 
+## Project links
+
+- Repository: https://github.com/Jhony071191/actionguard-ai
+- Live demo: https://actionguard-ai.netlify.app/
+
 ## Inspiration
 
 Business approval software is slow because it was designed for humans filling forms and waiting in ticket queues. AI agents operate at API speed. Giving them direct purchasing, vendor, or customer-data access creates a new gap: the action can become real before a person understands the risk.
@@ -58,4 +63,4 @@ Xano, XanoScript, React, TypeScript, Vite, Node.js, Vitest, OpenAPI, Web Crypto 
 - **Build time:** record the final elapsed human time immediately before submission.
 - **What AI + Xano accelerated:** tenant data modeling, API/workflow implementation, policy translation, integration adapters, tests, and evidence documentation.
 
-Repository URL, live demo URL, video URL, final elapsed time, and verified Xano endpoint evidence must be inserted only after those assets exist.
+Video URL, final elapsed time, and verified Xano endpoint evidence must be inserted only after those assets exist.

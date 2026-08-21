@@ -22,6 +22,7 @@ All results below were observed in this workspace; unexecuted checks are named s
 | Production dependency audit | PASS | 0 known vulnerabilities across all severities |
 | Secret-pattern scan | PASS | no AWS/GitHub/OpenAI key or private-key signature matched outside dependencies/build |
 | Public desktop smoke test | PASS | Netlify URL loaded over HTTPS; ALLOW, REVIEW, DENY, approval, execution evidence, masking, hash verification, and fallback policy draft were exercised with no application console errors |
+| GitHub publication integrity | PASS | all 57 files on `main` matched the local Git blob SHA; public repository and final commit were readable |
 
 ## Correction cycle
 
@@ -39,4 +40,4 @@ The production dependency tree has zero known vulnerabilities. The official Xano
 
 - Desktop browser QA passed against the public HTTPS deployment. The browser did not expose viewport emulation, so no real mobile-browser pass is claimed; responsive breakpoints were reviewed in source.
 - No Xano contract run occurred because an authenticated Xano session was unavailable.
-- No GitHub push or Devpost submission occurred.
+- No Devpost submission occurred.
