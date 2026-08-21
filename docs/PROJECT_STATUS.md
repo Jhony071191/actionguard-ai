@@ -24,10 +24,11 @@
 
 ## Pending integration work
 
+- Before exposing login publicly, manually rotate one synthetic demo password in Xano and store it in an approved password manager. The random verification passwords were intentionally not retained after the live test and must never be committed or embedded in the frontend.
 - Connect the public frontend login/runtime flow to the verified Xano API, deploy the updated environment safely, and repeat the full public browser journey without embedding a demo credential or bearer token.
 - The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
 - Prepare the final video and Devpost submission only after the public Xano-backed journey passes.
 
 ## Next indispensable action
 
-Implement the frontend login/session flow for Xano, deploy it without secrets, and repeat ALLOW, REVIEW/approval, DENY, audit, idempotency, and tenant-isolation checks through the public application before recording the submission video.
+Manually rotate and retain one synthetic demo password outside the repository, then implement the frontend login/session flow for Xano, deploy it without secrets, and repeat ALLOW, REVIEW/approval, DENY, audit, idempotency, and tenant-isolation checks through the public application before recording the submission video.

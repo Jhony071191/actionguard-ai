@@ -54,4 +54,5 @@ The production dependency tree has zero known vulnerabilities. The official Xano
 
 - Desktop browser QA passed against the public HTTPS deployment. The browser did not expose viewport emulation, so no real mobile-browser pass is claimed; responsive breakpoints were reviewed in source.
 - The public Netlify frontend has not yet been reconfigured and re-tested end-to-end against the live Xano API; the live backend and the public frontend have been verified independently.
+- The random passwords used for live synthetic authentication were intentionally not retained. A demo password must be manually rotated and stored outside the repository before the public login journey can be enabled.
 - No Devpost submission occurred.
