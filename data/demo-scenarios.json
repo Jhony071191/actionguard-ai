@@ -1,0 +1,5 @@
+[
+  {"id":"safe-renewal","expected":"ALLOW","organizationId":"org-demo","actor":{"id":"agent-ops-01","role":"procurement_agent"},"action":"software.renew","resource":"subscription/atlas-cloud","payload":{"amount":120,"currency":"USD","supplier":"Atlas Cloud"},"context":{"approvedProvider":true}},
+  {"id":"vendor-payment","expected":"REVIEW","organizationId":"org-demo","actor":{"id":"agent-ops-01","role":"procurement_agent"},"action":"vendor.create_and_pay","resource":"vendor/northstar-parts","payload":{"amount":7500,"currency":"USD","supplier":"Northstar Parts","bankAccount":"SYNTHETIC_BANK_VALUE"}},
+  {"id":"bulk-export","expected":"DENY","organizationId":"org-demo","actor":{"id":"agent-support-09","role":"support_agent"},"action":"customer.export","resource":"customers/all","payload":{"format":"csv","recordCount":10000},"context":{"recordCount":10000}}
+]

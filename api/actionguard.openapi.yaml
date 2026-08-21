@@ -1,0 +1,43 @@
+openapi: 3.1.0
+info: {title: ActionGuard AI API, version: 0.1.0}
+servers: [{url: http://localhost:8787}]
+paths:
+  /health:
+    get: {operationId: health, responses: {'200': {description: Healthy}}}
+  /v1/actions/evaluate:
+    post:
+      operationId: evaluateAction
+      parameters: [{$ref: '#/components/parameters/Organization'}]
+      requestBody: {required: true, content: {application/json: {schema: {$ref: '#/components/schemas/ActionIntent'}}}}
+      responses: {'201': {description: Evaluated}, '403': {description: Organization mismatch}}
+  /v1/actions:
+    get: {operationId: listActions, parameters: [{$ref: '#/components/parameters/Organization'}], responses: {'200': {description: Tenant actions}}}
+  /v1/actions/{actionId}:
+    get: {operationId: getAction, parameters: [{$ref: '#/components/parameters/Organization'}, {$ref: '#/components/parameters/ActionId'}], responses: {'200': {description: Action}, '404': {description: Not found}}}
+  /v1/actions/{actionId}/approve:
+    post: {operationId: approveAction, parameters: [{$ref: '#/components/parameters/Organization'}, {$ref: '#/components/parameters/ActionId'}], responses: {'200': {description: Approved and executed once}}}
+  /v1/actions/{actionId}/reject:
+    post: {operationId: rejectAction, parameters: [{$ref: '#/components/parameters/Organization'}, {$ref: '#/components/parameters/ActionId'}], responses: {'200': {description: Rejected}}}
+  /v1/actions/{actionId}/audit:
+    get: {operationId: getAudit, parameters: [{$ref: '#/components/parameters/Organization'}, {$ref: '#/components/parameters/ActionId'}], responses: {'200': {description: Events and verification}}}
+  /v1/policies:
+    get: {operationId: listPolicies, responses: {'200': {description: Policies}}}
+    post: {operationId: publishPolicy, responses: {'201': {description: Published}}}
+  /v1/policies/draft:
+    post: {operationId: draftPolicy, responses: {'201': {description: Editable draft}}}
+components:
+  parameters:
+    Organization: {name: x-organization-id, in: header, required: true, schema: {type: string}}
+    ActionId: {name: actionId, in: path, required: true, schema: {type: string, format: uuid}}
+  schemas:
+    ActionIntent:
+      type: object
+      required: [organizationId, idempotencyKey, actor, action, resource, payload]
+      properties:
+        organizationId: {type: string}
+        idempotencyKey: {type: string}
+        actor: {type: object, required: [id, role], properties: {id: {type: string}, role: {type: string}}}
+        action: {type: string}
+        resource: {type: string}
+        payload: {type: object, additionalProperties: true}
+        context: {type: object, additionalProperties: true}
