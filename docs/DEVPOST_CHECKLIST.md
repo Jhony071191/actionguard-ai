@@ -18,12 +18,12 @@
 ## Must be completed before final submission
 
 - [x] Create/push the public `Jhony071191/actionguard-ai` GitHub repository
-- [ ] Connect and verify the existing Xano instance as the central backend
-- [ ] Re-run the contract and scenario suite against deployed Xano
+- [x] Connect and verify the existing Xano instance as the central backend
+- [x] Re-run the contract and scenario suite against deployed Xano
 - [x] Deploy the web app and test the public URL
 - [ ] Record a concise demo video showing all three decisions and approval execution
 - [ ] Add final screenshots, project story, technology list, and repository/demo links to Devpost
-- [ ] Select Overall and Xano only after live Xano evidence exists
+- [ ] Select the Xano sponsor prize; Overall consideration is automatic
 - [ ] Confirm the final rules and submit before the official deadline
 
-Do not submit yet: the Xano connection and video are deliberately unclaimed.
+Do not submit yet: the public Xano-enabled frontend upload, demo video, and final submission review remain open.

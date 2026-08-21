@@ -5,7 +5,7 @@ All results below were observed in this workspace; unexecuted checks are named s
 | Check | Result | Evidence |
 | --- | --- | --- |
 | Strict TypeScript | PASS | `tsc -b --pretty false`, exit 0 |
-| Automated suite | PASS | 3 files, 22 tests, 0 failures, 316 ms |
+| Automated suite | PASS | 3 files, 25 tests, 0 failures, 314 ms |
 | Required scenarios ×3 | PASS | ALLOW / REVIEW / DENY on every pass |
 | Idempotency | PASS | duplicate returned original execution; audit stayed at two events |
 | Approval gate | PASS | REVIEW had no effect; approval produced APPROVED then one EXECUTED event |
@@ -24,7 +24,7 @@ All results below were observed in this workspace; unexecuted checks are named s
 | Live Xano audit integrity | PASS | EVALUATED → APPROVED → EXECUTED; all links and SHA-256 hashes independently recomputed successfully |
 | Live Xano tenant isolation | PASS | OtherCo list returned 0 records and its read of an ActionGuard Demo Co audit returned HTTP 404; access returned to HTTP 200 after restoring the tenant |
 | Live Xano execution timestamps | PASS | automatic and human-approved execution paths returned real millisecond timestamps, not a literal placeholder |
-| Production build | PASS | 23 modules; JS 211.68 kB (66.55 kB gzip); CSS 6.92 kB (2.17 kB gzip) |
+| Production build | PASS | 23 modules; JS 216.21 kB (67.82 kB gzip); CSS 8.78 kB (2.61 kB gzip) |
 | Production dependency audit | PASS | 0 known vulnerabilities across all severities |
 | Secret-pattern scan | PASS | no AWS/GitHub/OpenAI key or private-key signature matched outside dependencies/build |
 | Public desktop smoke test | PASS | Netlify URL loaded over HTTPS; ALLOW, REVIEW, DENY, approval, execution evidence, masking, hash verification, and fallback policy draft were exercised with no application console errors |
@@ -50,9 +50,11 @@ The live evidence pass also found `executed_at` serialized as the literal `"now"
 
 The production dependency tree has zero known vulnerabilities. The official Xano CLI was removed from the project dependency tree and is invoked only on demand. A full development-only audit still reports six high-severity transitive advisories in `lodash-es` through the official Xano Developer MCP language server, with no upstream fix available. That validator is not bundled into the browser build and remains development-only.
 
+The secure browser-session release added three gateway tests: expired-session fail-closed behavior, an unavailable-runtime guard, and the Xano login request/response contract. The full verification command passed with 25 tests before GitHub publication.
+
 ## Not claimed
 
 - Desktop browser QA passed against the public HTTPS deployment. The browser did not expose viewport emulation, so no real mobile-browser pass is claimed; responsive breakpoints were reviewed in source.
-- The public Netlify frontend has not yet been reconfigured and re-tested end-to-end against the live Xano API; the live backend and the public frontend have been verified independently.
-- The random passwords used for live synthetic authentication were intentionally not retained. A demo password must be manually rotated and stored outside the repository before the public login journey can be enabled.
+- The Netlify build environment now contains the public Xano base URL, but a new production upload has not completed. The currently published frontend and the live backend remain verified independently; public browser Xano E2E is not claimed.
+- A synthetic demo password was manually rotated and retained outside the repository. Its value was never shared with the automation or committed.
 - No Devpost submission occurred.
