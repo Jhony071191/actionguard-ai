@@ -12,6 +12,7 @@ The pre-flight control plane that lets AI agents move fast without turning API a
 
 - Repository: https://github.com/Jhony071191/actionguard-ai
 - Live demo: https://actionguard-ai.netlify.app/
+- Devpost draft preview: https://devpost.com/software/actionguard-ai-zw2u1n
 
 ## Inspiration
 
@@ -63,4 +64,4 @@ Xano, XanoScript, React, TypeScript, Vite, Node.js, Vitest, OpenAPI, Web Crypto 
 - **Build time:** approximately 12 focused build and verification hours across two calendar days.
 - **What AI + Xano accelerated:** tenant data modeling, API/workflow implementation, policy translation, integration adapters, tests, and evidence documentation.
 
-The verified repository and live-demo links are included above. The video link will be added only after the final public Xano-backed recording exists.
+The verified repository and live-demo links are included above. This story and the technology tags are saved in the Devpost draft. The video link will be added only after the final public Xano-backed recording exists.
