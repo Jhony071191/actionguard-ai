@@ -15,12 +15,19 @@
 - Public Netlify deployment at `https://actionguard-ai.netlify.app/`.
 - Desktop browser verification of all three outcomes, approval-before-execution, hash evidence, masked banking data, and deterministic Policy Studio fallback.
 - Public GitHub repository at `https://github.com/Jhony071191/actionguard-ai`, with all 57 tracked files verified against the local Git object hashes.
+- Existing Xano instance and workspace verified in the UI; six required tables, two functions, and all six `ActionGuard` endpoints are published on the live branch.
+- Two synthetic organizations and three synthetic users are present. No real personal, banking, or customer data is stored.
+- Live authentication verified for an administrator, a member, and an administrator in a second tenant; passwords and bearer tokens remain outside the repository and documentation.
+- Live Xano scenarios verified: ALLOW executes, REVIEW requires and accepts one human approval, DENY does not execute, and repeated idempotency keys return the original result.
+- Live tenant isolation verified with an empty OtherCo action list and HTTP 404 for a cross-tenant audit lookup; the synthetic administrator was restored to its original role and organization after testing.
+- Live SHA-256 audit chains and real execution timestamps independently recomputed and verified after the final correction cycle.
 
-## Externally blocked
+## Pending integration work
 
-- The supplied Xano instance was not available through an authenticated CLI profile. No instance or endpoint was modified; `xano profile list -d` returned no profiles.
+- Connect the public frontend login/runtime flow to the verified Xano API, deploy the updated environment safely, and repeat the full public browser journey without embedding a demo credential or bearer token.
 - The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
+- Prepare the final video and Devpost submission only after the public Xano-backed journey passes.
 
 ## Next indispensable action
 
-Authenticate the Xano CLI to the existing `jhony` instance, inspect a dry-run of `xano/`, push the reviewed backend, and run the same contract/scenario suite against it.
+Implement the frontend login/session flow for Xano, deploy it without secrets, and repeat ALLOW, REVIEW/approval, DENY, audit, idempotency, and tenant-isolation checks through the public application before recording the submission video.

@@ -7,12 +7,20 @@ query "actions/{action_id}/reject" verb=POST {
     text reason filters=trim|min:8|max:500
   }
   stack {
-    precondition ($auth.role == "reviewer" || $auth.role == "admin") {
+    db.query "user" {
+      where = $db.user.id == $auth.id && $db.user.is_active == true
+      return = {type: "single"}
+    } as $current_user
+    precondition ($current_user != null) {
+      error_type = "accessdenied"
+      error = "Active user required"
+    }
+    precondition ($current_user.role == "reviewer" || $current_user.role == "admin") {
       error_type = "accessdenied"
       error = "Reviewer role required"
     }
     db.query "action" {
-      where = $db.action.id == $input.action_id && $db.action.organization_id == $auth.organization_id
+      where = $db.action.id == $input.action_id && $db.action.organization_id == $current_user.organization_id
       return = {type: "single"}
     } as $pending
     precondition ($pending != null) {
@@ -26,7 +34,7 @@ query "actions/{action_id}/reject" verb=POST {
     db.transaction {
       stack {
         db.add "review" {
-          data = {organization_id: $auth.organization_id, action_id: $pending.id, reviewed_by: $auth.id, outcome: "REJECTED", reason: $input.reason, reviewed_at: now}
+          data = {organization_id: $current_user.organization_id, action_id: $pending.id, reviewed_by: $auth.id, outcome: "REJECTED", reason: $input.reason, reviewed_at: now}
         } as $reviewed
         db.edit "action" {
           field_name = "id"
@@ -34,7 +42,7 @@ query "actions/{action_id}/reject" verb=POST {
           data = {status: "REJECTED", updated_at: now}
         } as $updated
         function.run "append_audit_event" {
-          input = {organization_id: $auth.organization_id, action_id: $pending.id, actor_ref: $auth.id|to_text, event_type: "REJECTED", event_data: {reason: $input.reason}}
+          input = {organization_id: $current_user.organization_id, action_id: $pending.id, actor_ref: $auth.id|to_text, event_type: "REJECTED", event_data: {reason: $input.reason}}
         } as $rejected_event
       }
     }

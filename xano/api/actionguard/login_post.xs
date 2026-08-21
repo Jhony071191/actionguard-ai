@@ -3,7 +3,7 @@ query "auth/login" verb=POST {
   description = "Authenticate a demo or production user and return a scoped bearer token"
   input {
     email email filters=trim|lower
-    password password { sensitive = true }
+    text password { sensitive = true }
   }
   stack {
     db.query "user" {
