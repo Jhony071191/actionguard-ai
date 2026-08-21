@@ -60,7 +60,7 @@ Xano, XanoScript, React, TypeScript, Vite, Node.js, Vitest, OpenAPI, Web Crypto 
 - **Software replaced:** rigid procurement approval portals and spreadsheet/ticket controls.
 - **Why:** they cannot safely govern autonomous actions at API speed.
 - **AI tools:** Codex for implementation, review, tests, and XanoScript development; optional provider-neutral policy drafting at runtime.
-- **Build time:** record the final elapsed human time immediately before submission.
+- **Build time:** approximately 12 focused build and verification hours across two calendar days.
 - **What AI + Xano accelerated:** tenant data modeling, API/workflow implementation, policy translation, integration adapters, tests, and evidence documentation.
 
-Video URL, final elapsed time, and verified Xano endpoint evidence must be inserted only after those assets exist.
+The verified repository and live-demo links are included above. The video link will be added only after the final public Xano-backed recording exists.
