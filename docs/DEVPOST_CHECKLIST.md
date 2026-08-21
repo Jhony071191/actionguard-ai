@@ -22,8 +22,9 @@
 - [x] Re-run the contract and scenario suite against deployed Xano
 - [x] Deploy the web app and test the public URL
 - [ ] Record a concise demo video showing all three decisions and approval execution
-- [ ] Add final screenshots, project story, technology list, and repository/demo links to Devpost
+- [x] Add the project story, technology list, and repository/demo links to Devpost
+- [ ] Add final screenshots and the real 2–4 minute demo video
 - [ ] Select the Xano sponsor prize; Overall consideration is automatic
 - [ ] Confirm the final rules and submit before the official deadline
 
-Do not submit yet: the public Xano-enabled frontend upload, demo video, and final submission review remain open.
+The Devpost draft exists and its public preview was checked. Do not submit yet: the public Xano-enabled frontend upload, screenshots, demo video, sponsor selection, and final review remain open.
