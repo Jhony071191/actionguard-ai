@@ -1,4 +1,4 @@
-import { sha256 } from '../core/crypto';
+import { sha256Text } from '../core/crypto';
 import { DEMO_SCENARIOS, freshScenario } from '../core/scenarios';
 import { ActionGuardService } from '../core/service';
 import type { AuditEvent, EvaluationOutcome, EvaluationRecord } from '../core/types';
@@ -54,7 +54,11 @@ interface XanoAuditEvent {
 
 export class XanoGateway implements ActionGateway {
   readonly mode = 'xano' as const;
-  constructor(private readonly baseUrl: string, private readonly token: string, private readonly fetcher: typeof fetch = fetch) {}
+  private readonly fetcher: typeof fetch;
+
+  constructor(private readonly baseUrl: string, private readonly token: string, fetcher: typeof fetch = fetch) {
+    this.fetcher=fetcher.bind(globalThis);
+  }
 
   async runScenario(id: string): Promise<EvaluationOutcome> {
     const scenario = DEMO_SCENARIOS.find((candidate) => candidate.id === id);
@@ -70,7 +74,7 @@ export class XanoGateway implements ActionGateway {
   async getAudit(actionId: string, _organizationId: string) { const result=await this.request<{events:XanoAuditEvent[]}>(`/actions/${actionId}/audit`); return result.events.map(mapEvent); }
   async verifyAudit(actionId: string, organizationId: string) {
     const events=await this.getAudit(actionId,organizationId); let previousHash='0'.repeat(64);
-    for(let index=0;index<events.length;index+=1){const event=events[index];if(event.sequence!==index+1||event.previousHash!==previousHash)return false;const canonical=`${event.actionId}|${event.sequence}|${event.type}|${JSON.stringify(event.data)}|${event.previousHash}`;if(await sha256(canonical)!==event.eventHash)return false;previousHash=event.eventHash;}
+    for(let index=0;index<events.length;index+=1){const event=events[index];if(event.sequence!==index+1||event.previousHash!==previousHash)return false;const canonical=`${event.actionId}|${event.sequence}|${event.type}|${xanoEventDataJson(event)}|${event.previousHash}`;if(await sha256Text(canonical)!==event.eventHash)return false;previousHash=event.eventHash;}
     return events.length>0;
   }
   private async request<T>(path:string,init:RequestInit={}) {
@@ -85,6 +89,13 @@ export class XanoGateway implements ActionGateway {
 
 function mapRecord(record:XanoRecord):EvaluationRecord{return{id:String(record.id),createdAt:dateText(record.created_at),organizationId:String(record.organization_id),idempotencyKey:record.idempotency_key,actor:{id:String(record.actor_id),role:'authenticated'},action:record.action_name,resource:record.resource,maskedPayload:record.masked_payload,decision:record.decision,status:record.status,riskScore:record.risk_score,riskFactors:record.risk_factors??[],matchedRules:record.matched_rules??[],explanation:record.explanation,execution:record.execution?{executionId:record.execution.execution_id,executedAt:dateText(record.execution.executed_at),effect:record.execution.effect}:undefined};}
 function mapEvent(event:XanoAuditEvent):AuditEvent{return{id:String(event.id),actionId:String(event.action_id),organizationId:String(event.organization_id),sequence:event.sequence,timestamp:dateText(event.created_at),actorId:event.actor_ref,type:event.event_type,data:event.event_data,previousHash:event.previous_hash,eventHash:event.event_hash};}
+function xanoEventDataJson(event:AuditEvent):string{
+  const data=event.data as Record<string,unknown>;
+  if(event.type==='EVALUATED')return JSON.stringify({decision:data.decision,risk_score:data.risk_score});
+  if(event.type==='EXECUTED')return JSON.stringify({execution_id:data.execution_id,executed_at:data.executed_at,effect:data.effect});
+  if(event.type==='APPROVED'||event.type==='REJECTED')return JSON.stringify({reason:data.reason});
+  return JSON.stringify(data);
+}
 function dateText(value:string|number):string{const date=new Date(typeof value==='string'&&/^\d+$/.test(value)?Number(value):value);return Number.isNaN(date.valueOf())?String(value):date.toISOString();}
 
 const runtimeEnv=(import.meta as ImportMeta&{env?:{VITE_ACTIONGUARD_API_URL?:string}}).env??{};
