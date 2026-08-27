@@ -1,4 +1,4 @@
-# Project status — 22 August 2026
+# Project status — 27 August 2026
 
 ## Completed
 
@@ -25,13 +25,16 @@
 - Canonical `ActionGuard` API base URL configured in the existing Netlify project's build environment without exposing credentials.
 - Synthetic demo password manually rotated in Xano and retained outside the repository.
 - Devpost draft created as `ActionGuard AI`; the project name, elevator pitch, full story, verified repository/demo links, and technology tags are saved and previewed without duplicate placeholder headings.
+- Four-minute production kit completed outside the source repository: nine-scene capture plan, safe 3:55 target, clean 473-word narration, editing map, and the available real Xano-instance evidence.
+- Release audit repeated on 27 August: 25/25 tests, 15/15 XanoScript constructs, strict TypeScript, production build, and production dependency audit all passed; the live Netlify URL still identifies itself as `Local fallback`.
 
 ## Remaining release work
 
 - Upload the merged Xano-enabled frontend build to the existing Netlify site. The hosting connector saved the public API variable but its delegated upload command could not run under this workspace's network policy; the currently published URL therefore still serves the verified local-fallback build.
+- The production upload is ready but requires explicit authorization to transmit the public repository source to Netlify's build service.
 - Repeat the full public browser journey after that upload, using the privately retained synthetic password and without embedding any credential or bearer token.
 - The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
-- Prepare the final video and Devpost submission only after the public Xano-backed journey passes.
+- Capture the eight application screens in the production kit and record the final video only after the public Xano-backed journey passes. Automated capture was not claimed because the secure browser denied both the public Netlify and Xano pages in the recording session.
 - Complete Devpost Additional Info with the Xano sponsor selection and downloadable video backup only after the real MP4 exists; the final submission remains untouched.
 
 ## Next indispensable action
