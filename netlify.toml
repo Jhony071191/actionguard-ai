@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  VITE_ACTIONGUARD_API_URL = "https://xgrz-w2pq-acsr.n7e.xano.io/api:actionguard-v1"
 
 [[redirects]]
   from = "/*"
