@@ -25,18 +25,18 @@
 - Canonical `ActionGuard` API base URL configured in the existing Netlify project's build environment without exposing credentials.
 - Synthetic demo password manually rotated in Xano and retained outside the repository.
 - Devpost draft created as `ActionGuard AI`; the project name, elevator pitch, full story, verified repository/demo links, and technology tags are saved and previewed without duplicate placeholder headings.
-- Four-minute production kit completed outside the source repository: nine-scene capture plan, safe 3:55 target, clean 473-word narration, editing map, and the available real Xano-instance evidence.
-- Release audit repeated on 27 August: 25/25 tests, 15/15 XanoScript constructs, strict TypeScript, production build, and production dependency audit all passed; the live Netlify URL still identifies itself as `Local fallback`.
+- Four-minute production kit completed outside the source repository: nine-scene capture plan, safe 3:55 target, clean 473-word narration, editing map, and nine real production screenshots.
+- Xano-enabled frontend published to the existing Netlify site with the canonical public API URL committed in `netlify.toml` for reproducible hosted builds.
+- Public Xano browser journey passed on 27 August: ALLOW executed, REVIEW stayed pending until one human approval, DENY did not execute, bank data was redacted, and both two-event and three-event audit chains displayed `✓ Verified`.
+- Browser-native `fetch` binding and Xano JSON field-order normalization bugs found during production QA were corrected and covered by regression tests.
+- Release audit repeated on 27 August: 28/28 tests, 15/15 XanoScript constructs, strict TypeScript, production build, and production dependency audit all passed.
 
 ## Remaining release work
 
-- Upload the merged Xano-enabled frontend build to the existing Netlify site. The hosting connector saved the public API variable but its delegated upload command could not run under this workspace's network policy; the currently published URL therefore still serves the verified local-fallback build.
-- The production upload is ready but requires explicit authorization to transmit the public repository source to Netlify's build service.
-- Repeat the full public browser journey after that upload, using the privately retained synthetic password and without embedding any credential or bearer token.
 - The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
-- Capture the eight application screens in the production kit and record the final video only after the public Xano-backed journey passes. Automated capture was not claimed because the secure browser denied both the public Netlify and Xano pages in the recording session.
-- Complete Devpost Additional Info with the Xano sponsor selection and downloadable video backup only after the real MP4 exists; the final submission remains untouched.
+- Record the silent screen session, record the Spanish narration separately, combine both tracks, and export the real 3:50–3:55 MP4.
+- Complete Devpost Additional Info with the Xano sponsor selection, screenshots, hosted video, and downloadable MP4 backup after the real video exists; the final submission remains untouched.
 
 ## Next indispensable action
 
-Complete the existing Netlify site's production upload, then repeat ALLOW, REVIEW/approval, DENY, audit and masking checks through the public application before recording the 2–4 minute submission video.
+Produce the final 2–4 minute video from the verified shot list, then add the media and Xano prize selection to Devpost for final review before submission.
