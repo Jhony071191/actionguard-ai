@@ -14,9 +14,16 @@ export function canonicalJson(value: unknown): string {
   return JSON.stringify(stable(value));
 }
 
-export async function sha256(value: unknown): Promise<string> {
-  const bytes = new TextEncoder().encode(canonicalJson(value));
+async function digestText(value: string): Promise<string> {
+  const bytes = new TextEncoder().encode(value);
   const digest = await globalThis.crypto.subtle.digest('SHA-256', bytes);
   return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
+export function sha256(value: unknown): Promise<string> {
+  return digestText(canonicalJson(value));
+}
+
+export function sha256Text(value: string): Promise<string> {
+  return digestText(value);
+}
