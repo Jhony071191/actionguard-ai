@@ -30,11 +30,12 @@
 - Public Xano browser journey passed on 27 August: ALLOW executed, REVIEW stayed pending until one human approval, DENY did not execute, bank data was redacted, and both two-event and three-event audit chains displayed `✓ Verified`.
 - Browser-native `fetch` binding and Xano JSON field-order normalization bugs found during production QA were corrected and covered by regression tests.
 - Release audit repeated on 27 August: 28/28 tests, 15/15 XanoScript constructs, strict TypeScript, production build, and production dependency audit all passed.
+- A silent 3:55 visual edit was rendered from the nine verified screenshots at 1920×1080, 30 fps, H.264; it is an editing base, not the final narrated submission video.
 
 ## Remaining release work
 
 - The cloud browser has no viewport-emulation capability, so desktop QA passed but a real mobile-browser pass is not yet claimed. The responsive breakpoints were reviewed in source.
-- Record the silent screen session, record the Spanish narration separately, combine both tracks, and export the real 3:50–3:55 MP4.
+- Record the Spanish narration, combine it with the verified 3:55 silent visual base (optionally replacing static scenes with live clicks), and review the final MP4.
 - Complete Devpost Additional Info with the Xano sponsor selection, screenshots, hosted video, and downloadable MP4 backup after the real video exists; the final submission remains untouched.
 
 ## Next indispensable action
