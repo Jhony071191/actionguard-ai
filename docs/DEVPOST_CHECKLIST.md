@@ -26,6 +26,7 @@
 - [ ] Record a concise demo video showing all three decisions and approval execution
 - [x] Add the project story, technology list, and repository/demo links to Devpost
 - [x] Create the nine final production screenshots
+- [x] Render a 3:55 silent visual editing base at 1080p
 - [ ] Add the screenshots and the real 2–4 minute demo video to Devpost
 - [ ] Select the Xano sponsor prize; Overall consideration is automatic
 - [ ] Confirm the final rules and submit before the official deadline
